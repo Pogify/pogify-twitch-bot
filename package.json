@@ -1,0 +1,30 @@
+{
+  "name": "pogify-twitch-bot",
+  "version": "0.0.1",
+  "description": "Pogify twitch bot",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pogify/pogify-twitch-bot.git"
+  },
+  "keywords": [
+    "twitch",
+    "pogify",
+    "chatbot"
+  ],
+  "author": "Pogify",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Pogify/pogify-twitch-bot/issues"
+  },
+  "homepage": "https://github.com/Pogify/pogify-twitch-bot#readme",
+  "dependencies": {
+    "tmi.js": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/tmi.js": "^1.4.2"
+  }
+}
