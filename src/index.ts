@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import jose from "jose";
 import Axios from "axios";
+import cookieParser from "cookie-parser";
 
 import {
   BroadcasterCommands,
@@ -98,8 +99,9 @@ async function main() {
 
   const app = express();
 
+  app.use(cookieParser(process.env.COOKIE_SECRET));
   app.use(cors());
-  app.use("/auth/twitch", twitchAuth(client));
+  app.use("/auth/twitch", twitchAuth);
   app.use("/", async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
     if (token) {
