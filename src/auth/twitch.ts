@@ -19,26 +19,31 @@ export default function app(client: Client) {
   });
 
   app.get("/refresh", async (req, res) => {
-    const url = "https://id.twitch.tv/oauth2/token";
-
-    let newToken = await axios.post(
-      "/https://id.twitch.tv/oauth2/token",
-      undefined,
-      {
-        params: {
-          grant_type: "refresh_token",
-          client_id: process.env.TWITCH_CLIENT_ID!,
-          client_secret: process.env.TWITCH_CLIENT_SECRET!,
-          redirect_uri,
-        },
+    try {
+      let newToken = await axios.post(
+        "/https://id.twitch.tv/oauth2/token",
+        undefined,
+        {
+          params: {
+            grant_type: "refresh_token",
+            client_id: process.env.TWITCH_CLIENT_ID!,
+            client_secret: process.env.TWITCH_CLIENT_SECRET!,
+            redirect_uri,
+          },
+        }
+      );
+      res.send(newToken);
+    } catch (e) {
+      if (e.response) {
+        res.status(e.response.code).send(e.response.data);
+      } else {
+        console.error(e);
+        res.status(500).send(e.message);
       }
-    );
-    res.send(newToken);
+    }
   });
 
   app.get("/callback", async (req, res) => {
-    const url = "https://id.twitch.tv/oauth2/token";
-
     const params = new URLSearchParams();
     params.set("client_id", process.env.TWITCH_CLIENT_ID!);
     params.set("client_secret", process.env.TWITCH_CLIENT_SECRET!);
@@ -70,7 +75,11 @@ export default function app(client: Client) {
       }
     } catch (e) {
       console.error(e);
-      res.sendStatus(500);
+      if (e.response) {
+        res.send(e.response.data).status(e.response.status);
+      } else {
+        res.status(500).send(e.message);
+      }
     }
   });
   return app;

@@ -99,7 +99,8 @@ async function main() {
   const app = express();
 
   app.use(cors());
-  app.use(async (req, res, next) => {
+  app.use("/auth/twitch", twitchAuth(client));
+  app.use("/", async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
     if (token) {
       try {
@@ -121,8 +122,6 @@ async function main() {
       res.sendStatus(401);
     }
   });
-
-  app.use("/auth/twitch", twitchAuth(client));
 
   app.post("/join", async (req, res) => {
     try {
