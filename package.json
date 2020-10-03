@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "node lib/index.js",
     "build": "tsc",
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts -i channels.json"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,8 @@
     "express": "^4.17.1",
     "jose": "^2.0.2",
     "nanoid": "^3.1.12",
-    "tmi.js": "^1.5.0"
+    "tmi.js": "^1.5.0",
+    "whiskers": "^0.4.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",

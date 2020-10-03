@@ -1,0 +1,53 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <link rel="stylesheet" href="public/css/index.css" />
+    {if initialized}
+    <script src="public/js/index.js" defer></script>
+    {/if}
+    <title>Pogify Bot</title>
+  </head>
+
+  <body>
+    <div class="main">
+      {if initialized}
+      <div id="signin-button">
+        <div><button onclick="signin()">Sign In with Twitch</button></div>
+      </div>
+      <div id="profile">
+        <div>
+          <img src="" alt="" id="profile-img" />
+          <div id="profile-username"></div>
+        </div>
+        <div>
+          <button onclick="signout()">Sign Out</button>
+        </div>
+      </div>
+      <div id="status"></div>
+      <div id="action-panel">
+        <div><button onclick="connect()">Connect Pogify Chatbot</button></div>
+        <div>
+          <button onclick="disconnect()">Disconnect Pogify Chatbot</button>
+        </div>
+      </div>
+      <div>
+        <div id="current"></div>
+        <form action="javascript:set();">
+          <input type="text" name="session-id" id="session-id" />
+          <button type="submit">Set Session</button>
+        </form>
+      </div>
+      {else}
+      <div>
+        <h1>Pogify Chatbot not initialized.</h1>
+        <h3>Come back later</h3>
+      </div>
+      {/if}
+    </div>
+  </body>
+  <footer>
+    <div id="client-id" data-client-id="{client_id}"></div>
+  </footer>
+</html>
