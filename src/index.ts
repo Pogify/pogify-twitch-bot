@@ -17,8 +17,9 @@ import {
 import {
   getInitialChannelListFromDB,
   getSessionFromDB as getSessionIdFromDB,
-  removeChannelFromDB,
-  setSession,
+  setChannelConnectedInDB,
+  setChannelDisconnectedInDB,
+  setSessionInDB,
 } from "./DB_interface";
 
 require("dotenv").config();
@@ -214,6 +215,7 @@ async function main() {
 
   app.post("/join", async (req, res) => {
     try {
+      await setChannelConnectedInDB(`#${req.twitch.login}`);
       await client.join(`#${req.twitch.login}`);
       res.status(200).send(req.twitch.login);
     } catch (e) {
@@ -225,7 +227,7 @@ async function main() {
   app.post("/part", async (req, res) => {
     const channel = `#${req.twitch.login}`;
     try {
-      await removeChannelFromDB(channel);
+      await setChannelDisconnectedInDB(channel);
       await client.part(channel);
       res.status(200).send(req.twitch.login);
     } catch (e) {
@@ -244,7 +246,10 @@ async function main() {
     }
 
     try {
-      await setSession(`#${req.twitch.login}`, req.query.sessionId as string);
+      await setSessionInDB(
+        `#${req.twitch.login}`,
+        req.query.sessionId as string
+      );
       res.status(200).send(req.query.sessionId);
     } catch (e) {
       console.log(e);

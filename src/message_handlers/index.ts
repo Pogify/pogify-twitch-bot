@@ -1,5 +1,5 @@
 import { ChatUserstate, Client } from "tmi.js";
-import { getSessionFromDB } from "../DB_interface";
+import { getSessionFromDB, setChannelDisconnectedInDB } from "../DB_interface";
 import { setSession } from "./set";
 
 export type BroadcasterCommands =
@@ -17,7 +17,7 @@ export interface handleBroadcasterCommandContext {
   args: string[];
 }
 
-export function handleBroadcasterCommands(
+export async function handleBroadcasterCommands(
   context: handleBroadcasterCommandContext
 ) {
   const { channel, cmd, client } = context;
@@ -33,7 +33,8 @@ export function handleBroadcasterCommands(
       return;
     case "disconnect":
       client.say(channel, "Pogify Bot disconnected");
-      client.part(channel);
+      await setChannelDisconnectedInDB(channel);
+      await client.part(channel);
       return;
   }
 }

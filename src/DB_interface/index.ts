@@ -7,7 +7,7 @@ db.run(`CREATE TABLE IF NOT EXISTS channels (
   connected INTEGER DEFAULT 1
 )`);
 
-export async function getInitialChannelListFromDB(): Promise<string[]> {
+export function getInitialChannelListFromDB(): Promise<string[]> {
   return new Promise((resolve, reject) => {
     db.all(
       "SELECT channel FROM channels WHERE connected = 1;",
@@ -20,7 +20,7 @@ export async function getInitialChannelListFromDB(): Promise<string[]> {
   });
 }
 
-export async function getSessionFromDB(channel: string): Promise<string> {
+export function getSessionFromDB(channel: string): Promise<string> {
   return new Promise((resolve, reject) => {
     db.get(
       "SELECT session FROM channels WHERE channel like ? LIMIT 1",
@@ -33,18 +33,18 @@ export async function getSessionFromDB(channel: string): Promise<string> {
   });
 }
 
-export async function setSession(
+export function setSessionInDB(
   channel: string,
   session: string
 ): Promise<void> {
-  new Promise<void>((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     db.run(
       "INSERT INTO channels (channel, session) VALUES ($channel,$session) ON CONFLICT(channel) DO UPDATE SET session = $session, connected = 1;",
       {
         $channel: channel,
         $session: session,
       },
-      (err: any, res: any) => {
+      (err) => {
         if (err) return reject(err);
         resolve();
       }
@@ -52,13 +52,38 @@ export async function setSession(
   });
 }
 
-export function removeChannelFromDB(channel: string): Promise<void> {
+export function setChannelConnectedInDB(channel: string): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    db.run(
+      "UPDATE channels SET connected = 1 WHERE channel like $channel",
+      (err) => {
+        if (err) return reject(err);
+        resolve();
+      }
+    );
+  });
+}
+
+export function setChannelDisconnectedInDB(channel: string): Promise<void> {
   return new Promise((resolve, reject) => {
     db.run(
       "UPDATE channels SET connected = 0 WHERE channel like $channel",
       { $channel: channel },
       (err) => {
         if (err) return reject(err);
+        resolve();
+      }
+    );
+  });
+}
+
+export function deleteChannelFromDB(channel: string): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    db.run(
+      "DELETE FROM channels WHERE channel like $channel",
+      { $channel: channel },
+      (err) => {
+        if (err) reject(err);
         resolve();
       }
     );
