@@ -1,6 +1,14 @@
+import path from "path";
 import sqlite3 from "sqlite3";
 
-const db = new sqlite3.Database(process.cwd() + "/db/channels.db");
+if (!process.env.DATABASE_FILE) {
+  console.error("DATABASE_FILE not defined in .env");
+  process.exit(1);
+}
+
+const db = new sqlite3.Database(
+  path.join(process.cwd(), "db", process.env.DATABASE_FILE)
+);
 db.run(`CREATE TABLE IF NOT EXISTS channels (
   channel TEXT UNIQUE PRIMARY KEY NOT NULL,
   session TEXT NOT NULL,
