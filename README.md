@@ -87,6 +87,7 @@ All endpoints with the exception of the root `/`, init `/init`, and init callbac
 ## Considerations:
 
 1. using oidc id_tokens would allow tokens issued by other client_ids to be used here as long as it's registered as a valid `aud`. However, that then means that emails are also as part of the token scope which is both unnecessary and may cause some friction for people weary about pogify asking for their email.
+2. port to golang for the additional performance.
 
 ## TODO:
 
