@@ -1,6 +1,7 @@
 import path from "path";
 import sqlite3 from "sqlite3";
 
+require("dotenv").config();
 if (!process.env.DATABASE_FILE) {
   console.error("DATABASE_FILE not defined in .env");
   process.exit(1);
