@@ -127,6 +127,11 @@ async function main() {
       return;
     }
 
+    if (!req.query.code) {
+      res.sendStatus(400);
+      return;
+    }
+
     const params = new URLSearchParams();
     params.set("client_id", process.env.TWITCH_CLIENT_ID!);
     params.set("client_secret", process.env.TWITCH_CLIENT_SECRET!);
