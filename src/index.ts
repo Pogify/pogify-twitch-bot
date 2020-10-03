@@ -239,7 +239,7 @@ async function main() {
       return res.status(400).send("missing sessionId param");
     }
 
-    if (!(req.query.sessionId as string).match(/^[a-z0-9]{5}&/i)) {
+    if (!(req.query.sessionId as string).match(/^[a-z0-9]{5}$/i)) {
       return res.status(400).send("invalid sessionId");
     }
 
