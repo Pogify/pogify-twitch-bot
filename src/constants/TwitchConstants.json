@@ -1,0 +1,4 @@
+{
+  "token": "https://id.twitch.tv/oauth2/token",
+  "users": "https://api.twitch.tv/helix/users"
+}

@@ -1,0 +1,5 @@
+{
+  "base": "https://www.pogify.com/",
+  "session": "https://www.pogify.com/session",
+  "create": "https://www.pogify.com/create"
+}
