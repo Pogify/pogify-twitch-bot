@@ -87,13 +87,16 @@ All endpoints with the exception of the root `/`, init `/init`, and init callbac
 ## Considerations:
 
 1. using oidc id_tokens would allow tokens issued by other client_ids to be used here as long as it's registered as a valid `aud`. However, that then means that emails are also as part of the token scope which is both unnecessary and may cause some friction for people weary about pogify asking for their email.
-  - means that we need to request the user from the `get users` endpoint of the Twitch API.
-  - or maybe just have a shared secret to give the pogify api a direct line into the bot.
-  - or maybe just use the same client_id for both the pogify api and pogify_bot? 
+   - means that we need to request the user from the `get users` endpoint of the Twitch API.
+   - or maybe just have a shared secret to give the pogify api a direct line into the bot.
+   - or maybe just use the same client_id for both the pogify api and pogify_bot? 
 2. issue pogify tokens? (is that really necessary?)
 3. port to golang for the additional performance.
 4. migrate off of sqlite3. but also probably wouldn't  use that much storage for it anyways...
-
+5. periodically disconnect inactive channels?
+   - how often? 
+   - what would be the parameters to disconnect?
+   - if kept connected then would just always be reading chats. 
 
 ## TODO:
 
