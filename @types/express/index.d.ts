@@ -1,7 +1,7 @@
 declare namespace Express {
   interface Request {
-    twitch: {
-      broadcaster_type: BroadecasterType;
+    twitch?: {
+      broadcaster_type: BroadcasterType;
       description: string;
       display_name: string;
       email?: string;
@@ -16,5 +16,5 @@ declare namespace Express {
   }
 }
 
-type BroadecasterType = "partner" | "affiliate" | "";
+type BroadcasterType = "partner" | "affiliate" | "";
 type type = "staff" | "admin" | "global_mod" | "";
