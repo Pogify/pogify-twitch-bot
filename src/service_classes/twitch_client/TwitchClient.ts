@@ -36,7 +36,22 @@ export default class TwitchClient {
       // @ts-expect-error || something wrong with the types
       const client: Client = new Client(opts);
 
-      client.on("message", async (channel, userstate, message, self) => {
+      client.on("message", TwitchClient.handleMessage);
+      client.on("connected", () => {
+        this.client = client;
+        resolve();
+      });
+
+      client.connect().catch(reject);
+    });
+  }
+
+  public static async handleMessage(
+    channel: string,
+    userstate: ChatUserstate,
+    message: string,
+    self: boolean
+  ): Promise<void> {
         if (self || !message.match(/^!pogify/i)) return;
 
         if (message.match(/^!pogify$/i)) {
@@ -56,15 +71,6 @@ export default class TwitchClient {
         } else {
           // handleViewerCommands(client, channel, userstate, cmd as ViewerCommands, args);
         }
-      });
-
-      client.on("connected", () => {
-        this.client = client;
-        resolve();
-      });
-
-      client.connect().catch(reject);
-    });
   }
 
   public static async handleBroadcasterCommands(
