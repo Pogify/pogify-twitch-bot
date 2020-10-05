@@ -6,17 +6,7 @@
     <title>Pogify Bot Init Panel</title>
     <script>
       function init() {
-        let params = new URLSearchParams();
-        params.set("redirect_uri", window.location.origin + "/init/callback");
-        params.set("scope", "chat:read chat:edit");
-        params.set("response_type", "code");
-        params.set(
-          "client_id",
-          document.getElementById("client-id").dataset.clientId
-        );
-        params.set("force_verify", "true");
-        window.location.href =
-          "https://id.twitch.tv/oauth2/authorize?" + params.toString();
+        window.location.href = "/init/authorize";
       }
     </script>
   </head>
