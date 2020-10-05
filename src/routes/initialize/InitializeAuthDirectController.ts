@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import redirectUri from "../../utils/RedirectUri";
-import Logger from "../../utils/logger/Logger";
 import BaseController from "../BaseController";
 import TwitchConstants from "../../constants/TwitchConstants.json";
 
@@ -20,9 +19,7 @@ export default class InitialzeAuthDirectController extends BaseController {
 
       res.redirect(`${TwitchConstants.authorize}?${params.toString()}`);
     } catch (e) {
-      Logger.getLogger().error(`uncaught error in ${this.constructor.name}`);
-      Logger.getLogger().error(e.toString());
-      this.fail(res, e);
+      this.uncaughtError(res, e);
     }
   }
 }

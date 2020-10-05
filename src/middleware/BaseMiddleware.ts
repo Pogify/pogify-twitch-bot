@@ -1,7 +1,6 @@
 /* eslint class-methods-use-this: off */
 import { NextFunction, Request, Response } from "express";
 import BaseHandler from "../BaseHandler";
-import Logger from "../utils/logger/Logger";
 
 export default abstract class BaseMiddleware extends BaseHandler {
   protected abstract executeImpl(
@@ -24,9 +23,7 @@ export default abstract class BaseMiddleware extends BaseHandler {
     try {
       await this.executeImpl(req, res, next);
     } catch (e) {
-      Logger.getLogger().error("[BaseHandler]: Uncaught controller error");
-      Logger.getLogger().error(e);
-      this.fail(res, "An unexpected error occurred");
+      this.uncaughtError(res, e, "[BaseMiddleware]: Uncaught controller error");
     }
   };
 }

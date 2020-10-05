@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { nanoid } from "nanoid";
-import Logger from "../../utils/logger/Logger";
 import BaseMiddleware from "../BaseMiddleware";
 import CsrfTokenConstants from "../../constants/CsrfTokenConstants.json";
 
@@ -20,8 +19,7 @@ export default class CsrfTokenIssueMiddleware extends BaseMiddleware {
       });
       this.next(next);
     } catch (e) {
-      Logger.getLogger().error(`unhandled error in ${this.constructor.name}`);
-      Logger.getLogger().error(e.toString());
+      this.uncaughtError(res, e);
     }
   }
 }
