@@ -75,9 +75,21 @@ export default abstract class BaseHandler {
   }
 
   public fail(res: Response, error: Error | string): Response<unknown> {
-    Logger.getLogger().error(error.toString());
     return res.status(500).json({
       message: error.toString(),
     });
+  }
+
+  public uncaughtError(
+    res: Response,
+    error: Error | string,
+    message?: string
+  ): void {
+    Logger.getLogger().error(`uncaught error in ${this.constructor.name}`);
+    Logger.getLogger().error(message || error.toString());
+    if (message) {
+      Logger.getLogger().error(error.toString());
+    }
+    this.fail(res, "An error occurred");
   }
 }
