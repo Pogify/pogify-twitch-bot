@@ -7,7 +7,9 @@ if (!process.env.DATABASE_FILE) {
 }
 
 const db = new sqlite3.Database(
-  path.join(process.cwd(), "db", process.env.DATABASE_FILE || ":memory:")
+  process.env.DATABASE_FILE
+    ? path.join(process.cwd(), "db", process.env.DATABASE_FILE)
+    : ":memory:"
 );
 db.run(`CREATE TABLE IF NOT EXISTS channels (
   channel TEXT UNIQUE PRIMARY KEY NOT NULL,
