@@ -3,6 +3,10 @@
 require("dotenv").config();
 
 import "module-alias/register";
+import Logger from "./src/utils/logger/Logger";
 import Server from "./src/core/server";
 
-Server();
+const app = Server();
+app.listen(process.env.PORT, () => {
+  Logger.getLogger().info(`Server Started on ${process.env.PORT}`);
+});
