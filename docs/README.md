@@ -1,3 +1,10 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/da79a4541613fa641d29/maintainability)](https://codeclimate.com/github/Pogify/pogify-twitch-bot/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/da79a4541613fa641d29/test_coverage)](https://codeclimate.com/github/Pogify/pogify-twitch-bot/test_coverage)
+![David DM](https://david-dm.org/pogify/pogify-twitch-bot.svg)
+
+[![GitHub license](https://img.shields.io/github/license/pogify/pogify-twitch-bot.svg)](https://github.com/pogify/pogify-twitch-bot/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/pogify/pogify-twitch-bot.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/pogify/pogify-twitch-bot/stargazers/)
+
 # pogify-twitch-bot
 
 Twitch chatbot for pogify
@@ -89,16 +96,17 @@ All endpoints with the exception of the root `/`, init `/init`, and init callbac
 1. using oidc id_tokens would allow tokens issued by other client_ids to be used here as long as it's registered as a valid `aud`. However, that then means that emails are also as part of the token scope which is both unnecessary and may cause some friction for people weary about pogify asking for their email.
    - means that we need to request the user from the `get users` endpoint of the Twitch API.
    - or maybe just have a shared secret to give the pogify api a direct line into the bot.
-   - or maybe just use the same client_id for both the pogify api and pogify_bot? 
+   - or maybe just use the same client_id for both the pogify api and pogify_bot?
 2. issue pogify tokens? (is that really necessary?)
 3. port to golang for the additional performance.
-4. migrate off of sqlite3. but also probably wouldn't  use that much storage for it anyways...
+4. migrate off of sqlite3. but also probably wouldn't use that much storage for it anyways...
 5. periodically disconnect inactive channels?
-   - how often? 
+   - how often?
    - what would be the parameters to disconnect?
-   - if kept connected then would just always be reading chats. 
+   - if kept connected then would just always be reading chats.
 
 ## TODO:
 
 - better UI.
   - current ui is barebones.
+- tests
