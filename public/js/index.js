@@ -6,25 +6,27 @@ const currentDiv = document.getElementById("current");
 
 // self calling init function
 (function init() {
-  if (window.location.hash) {
-    token = parseHash(window.location.hash);
-
-    if (!verifyToken(token)) return;
-
-    if (token.access_token) {
-      getProfileInformation().then(() => {
-        setProfileDiv(userProfile.profile_image_url, userProfile.display_name);
-        getCurrent();
-      });
-      history.replaceState(null, "", window.location.href.split("#")[0]);
-      document.getElementById("signin-button").style.display = "none";
-    } else {
-      document.getElementById("profile").style.display = "none";
-    }
-  } else {
-    document.getElementById("profile").style.display = "none";
+  if (!window.location.hash) {
+    return hideProfile();
   }
-}());
+
+  token = parseHash(window.location.hash);
+
+  if (!verifyToken(token)) return;
+
+  if (!token.accessToken) return hideProfile();
+
+  getProfileInformation().then(() => {
+    setProfileDiv(userProfile.profile_image_url, userProfile.display_name);
+    getCurrent();
+  });
+  history.replaceState(null, "", window.location.href.split("#")[0]);
+  document.getElementById("signin-button").style.display = "none";
+})();
+
+function hideProfile() {
+  document.getElementById("profile").style.display = "none";
+}
 
 function signin() {
   const params = new URLSearchParams();
@@ -162,7 +164,8 @@ function set() {
 
 function randomString(length) {
   let text = "";
-  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   for (let i = 0; i < length; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
