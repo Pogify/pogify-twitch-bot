@@ -1,4 +1,5 @@
 {
   "token": "https://id.twitch.tv/oauth2/token",
-  "users": "https://api.twitch.tv/helix/users"
+  "users": "https://api.twitch.tv/helix/users",
+  "authorize": "https://id.twitch.tv/oauth2/authorize"
 }

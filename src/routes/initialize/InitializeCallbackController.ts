@@ -15,16 +15,9 @@ export default class InitializeCallbackController extends BaseController {
         return;
       }
 
-      const { state } = req.query;
-      const { csrfState } = req.cookies;
-      if (state && csrfState && state !== csrfState) {
-        res.status(422).send(`Invalid state: ${csrfState} != ${state}`);
-        return;
-      }
-
       const token = await FetchToken({
         code: req.query.code as string,
-        redirectUri: redirectUri(req.protocol, req.hostname),
+        redirectUri: redirectUri(req.protocol, req.hostname, "/init/callback"),
       });
       const user = await TwitchUser.FetchUser({ token });
 

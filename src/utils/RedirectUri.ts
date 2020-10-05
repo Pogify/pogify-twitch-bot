@@ -1,5 +1,10 @@
-export default function redirectUri(proto: string, host: string): string {
-  if (host === "localhost") return `${proto}://localhost:${process.env.PORT}/`;
+export default function redirectUri(
+  proto: string,
+  host: string,
+  path: string
+): string {
+  if (host === "localhost")
+    return `${proto}://localhost:${process.env.PORT}${path}`;
 
-  return `${proto}://${host}/`;
+  return `${proto}://${host}${path}`;
 }
