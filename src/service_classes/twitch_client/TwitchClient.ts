@@ -12,6 +12,23 @@ export default class TwitchClient {
 
   static refreshToken: string | undefined;
 
+  public static BuildOptions(
+    token: string,
+    initialChannels: string[]
+  ): Options {
+    return {
+      connection: {
+        secure: true,
+      },
+      options: { debug: true },
+      identity: {
+        username: process.env.BOT_USERNAME,
+        password: `oauth:${token}`,
+      },
+      channels: initialChannels,
+    };
+  }
+
   public static async init(token: string): Promise<void> {
     // eslint-disable-next-line consistent-return
     return new Promise(async (resolve, reject) => {
@@ -22,18 +39,7 @@ export default class TwitchClient {
         return reject(e);
       }
       // Define configuration options
-      const opts: Options = {
-        connection: {
-          secure: true,
-        },
-        options: { debug: true },
-        identity: {
-          username: "pogify_bot",
-          // password: "oauth:" + token.access_token,
-          password: `oauth:${token}`,
-        },
-        channels: initialChannels,
-      };
+      const opts = TwitchClient.BuildOptions(token, initialChannels);
       // Create a client with our options
       // @ts-expect-error || something wrong with the types
       const client: Client = new Client(opts);
