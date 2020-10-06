@@ -15,10 +15,26 @@ export default class InitializeCallbackController extends BaseController {
         return;
       }
 
-      const token = await FetchToken({
-        code: req.query.code as string,
-        redirectUri: redirectUri(req.protocol, req.hostname, "/init/callback"),
-      });
+      let token: string;
+      try {
+        token = await FetchToken({
+          code: req.query.code as string,
+          redirectUri: redirectUri(
+            req.protocol,
+            req.hostname,
+            "/init/callback"
+          ),
+        });
+      } catch (err) {
+        if (err.response && err.response.status === 400) {
+          Logger.getLogger().info(JSON.stringify(err));
+          this.clientError(res, "invalid code");
+        } else {
+          this.fail(res, err);
+        }
+        return;
+      }
+
       const user = await TwitchUser.FetchUser({ token });
 
       if (user.display_name !== process.env.BOT_USERNAME) {
