@@ -12,7 +12,7 @@ export default class TwitchClient {
 
   static refreshToken: string | undefined;
 
-  public static BuildOptions(
+  protected static OptionsFactory(
     token: string,
     initialChannels: string[]
   ): Options {
@@ -31,31 +31,33 @@ export default class TwitchClient {
 
   public static async init(token: string): Promise<void> {
     // eslint-disable-next-line consistent-return
-    return new Promise(async (resolve, reject) => {
-      let initialChannels: string[];
-      try {
-        initialChannels = await DBI.getInitialChannelListFromDB();
-      } catch (e) {
-        return reject(e);
-      }
+
+    const initialChannels = await DBI.getInitialChannelListFromDB();
+
+    this.client = await this.initClient(token, initialChannels);
+    TwitchClient.BindEventHandlers(this.client);
+  }
+
+  public static initClient(
+    token: string,
+    initialChannels = [] as string[]
+  ): Promise<Client> {
+    return new Promise((resolve, reject) => {
       // Define configuration options
-      const opts = TwitchClient.BuildOptions(token, initialChannels);
+      const opts = TwitchClient.OptionsFactory(token, initialChannels);
       // Create a client with our options
       // @ts-expect-error || something wrong with the types
       const client: Client = new Client(opts);
 
-      TwitchClient.BindHandlers(client);
-
-      client.on("connected", () => {
-        this.client = client;
-        resolve();
+      client.once("connected", () => {
+        resolve(client);
       });
 
       client.connect().catch(reject);
     });
   }
 
-  public static BindHandlers(client: Client): void {
+  public static BindEventHandlers(client: Client): void {
     client.on("message", TwitchClient.handleMessage);
     client.on("disconnected", TwitchClient.handleDisconnect);
   }
