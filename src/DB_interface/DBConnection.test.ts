@@ -1,9 +1,7 @@
-process.env.DATABASE_FILE = undefined;
 import { Database } from "sqlite3";
 import DBConnection from "./DBConnection";
 
 beforeEach(() => {
-  process.env.DATABASE_FILE = undefined;
   // @ts-ignore
   DBConnection.instance = undefined;
 });
