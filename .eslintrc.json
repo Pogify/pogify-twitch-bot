@@ -42,5 +42,5 @@
       }
     ]
   },
-  "ignorePatterns": ["public", "lib", "*.d.ts", "*.test.ts"]
+  "ignorePatterns": ["public", "lib", "*.d.ts", "*.test.ts", "__*__"]
 }
