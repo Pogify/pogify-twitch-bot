@@ -1,9 +1,4 @@
-export type BroadcasterCommands =
-  | "ok"
-  | "set"
-  | "create"
-  | "disconnect"
-  | "ping";
+export type BroadcasterCommands = "set" | "create" | "disconnect" | "ping";
 
 export interface IHandleBroadcasterCommandArgs {
   channel: string;
