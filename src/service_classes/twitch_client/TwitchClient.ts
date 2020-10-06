@@ -71,8 +71,7 @@ export default class TwitchClient {
     if (self || !message.match(/^!pogify/i)) return;
 
     if (message.match(/^!pogify$/i)) {
-      TwitchClient.saySessionForChannel(channel);
-
+      TwitchClient.SaySessionForChannel(channel);
       return;
     }
 
@@ -120,7 +119,7 @@ export default class TwitchClient {
     }
   }
 
-  protected static async saySessionForChannel(channel: string): Promise<void> {
+  public static async SaySessionForChannel(channel: string): Promise<void> {
     if (!TwitchClient.client) throw new ClientNotInitialized();
 
     const session = await DBI.getSessionFromDB(channel);
@@ -157,8 +156,8 @@ export default class TwitchClient {
     if (!TwitchClient.client) throw new ClientNotInitialized();
     const { channel } = args;
 
-    await DBI.setChannelConnectedInDB(channel);
     await TwitchClient.client.join(channel);
+    await DBI.setChannelConnectedInDB(channel);
   }
 
   public static async PartFromChannel(args: {
@@ -168,7 +167,10 @@ export default class TwitchClient {
     const { channel } = args;
 
     await DBI.setChannelDisconnectedInDB(channel);
-    await TwitchClient.client.say(channel, "Pogify Bot disconnected");
+    await TwitchClient.client.say(
+      channel,
+      `${process.env.BOT_USERNAME} disconnected`
+    );
 
     await TwitchClient.client.part(channel);
   }
