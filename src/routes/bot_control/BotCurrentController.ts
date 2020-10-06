@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Logger from "../../utils/logger/Logger";
 import BaseController from "../BaseController";
-import * as DBI from "../../DB_interface";
+import * as DBI from "../../DB_interface/channel_session";
 
 export default class BotCurrentController extends BaseController {
   protected async executeImpl(req: Request, res: Response): Promise<void> {

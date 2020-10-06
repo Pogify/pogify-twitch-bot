@@ -3,7 +3,7 @@ import { ChatUserstate, Client, Options } from "tmi.js";
 
 import validateSessionID from "../../utils/ValidateSessionID";
 import pogifyUrls from "../../constants/PogifyConstants.json";
-import * as DBI from "../../DB_interface";
+import * as DBI from "../../DB_interface/channel_session";
 import { BroadcasterCommands, IHandleBroadcasterCommandArgs } from "./types";
 import ClientNotInitialized from "./errors/ClientNotInitialized";
 
