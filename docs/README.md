@@ -1,7 +1,13 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/da79a4541613fa641d29/maintainability)](https://codeclimate.com/github/Pogify/pogify-twitch-bot/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/da79a4541613fa641d29/test_coverage)](https://codeclimate.com/github/Pogify/pogify-twitch-bot/test_coverage)
 ![David DM](https://david-dm.org/pogify/pogify-twitch-bot.svg)
+[![devDependencies Status](https://david-dm.org/pogify/pogify-twitch-bot/dev-status.svg)](https://david-dm.org/pogify/pogify-twitch-bot?type=dev)
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/Pogify/pogify-twitch-bot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Pogify/pogify-twitch-bot/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Pogify/pogify-twitch-bot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Pogify/pogify-twitch-bot/context:javascript)
+
+[![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com) 
+[![first-timers Friendly](https://img.shields.io/badge/first--timers-friendly-blue.svg)](http://www.firsttimersonly.com/)
 [![GitHub license](https://img.shields.io/github/license/pogify/pogify-twitch-bot.svg)](https://github.com/pogify/pogify-twitch-bot/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/pogify/pogify-twitch-bot.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/pogify/pogify-twitch-bot/stargazers/)
 
