@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import Logger from "../../utils/logger/Logger";
 import BaseMiddleware from "../BaseMiddleware";
 import { TwitchUser } from "../../service_classes/models/twitch_user/TwitchUser";
-import ValidateAuthorizationHeader from "../../utils/ValidateAuthorizationHeader";
+import ExtractAuthorizationToken from "../../utils/ValidateAuthorizationHeader";
 
 export default class TwitchUserMiddleware extends BaseMiddleware {
   protected async executeImpl(
@@ -16,7 +16,7 @@ export default class TwitchUserMiddleware extends BaseMiddleware {
         return;
       }
 
-      const token = ValidateAuthorizationHeader(req.headers.authorization);
+      const token = ExtractAuthorizationToken(req.headers.authorization);
 
       req.twitch = await TwitchUser.FetchUser({ token });
       this.next(next);

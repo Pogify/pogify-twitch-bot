@@ -35,7 +35,7 @@ export default abstract class BaseHandler {
     code: number,
     message: string
   ): Response<unknown> {
-    return res.status(code).json({ message });
+    return res.status(code).json({ code, message });
   }
 
   public created(res: Response): Response<unknown> {
@@ -43,7 +43,7 @@ export default abstract class BaseHandler {
   }
 
   public clientError(res: Response, message?: string): Response<unknown> {
-    return BaseHandler.jsonResponse(res, 400, message || "Unauthorized");
+    return BaseHandler.jsonResponse(res, 400, message || "Client Error");
   }
 
   public unauthorized(res: Response, message?: string): Response<unknown> {
@@ -51,7 +51,7 @@ export default abstract class BaseHandler {
   }
 
   public paymentRequired(res: Response, message?: string): Response<unknown> {
-    return BaseHandler.jsonResponse(res, 402, message || "Payment required");
+    return BaseHandler.jsonResponse(res, 402, message || "Payment Required");
   }
 
   public forbidden(res: Response, message?: string): Response<unknown> {
@@ -59,7 +59,7 @@ export default abstract class BaseHandler {
   }
 
   public notFound(res: Response, message?: string): Response<unknown> {
-    return BaseHandler.jsonResponse(res, 404, message || "Not found");
+    return BaseHandler.jsonResponse(res, 404, message || "Not Found");
   }
 
   public conflict(res: Response, message?: string): Response<unknown> {
@@ -67,18 +67,24 @@ export default abstract class BaseHandler {
   }
 
   public tooMany(res: Response, message?: string): Response<unknown> {
-    return BaseHandler.jsonResponse(res, 429, message || "Too many requests");
+    return BaseHandler.jsonResponse(res, 429, message || "Too Many Requests");
   }
 
   public todo(res: Response): Response<unknown> {
     return BaseHandler.jsonResponse(res, 400, "TODO");
   }
 
-  public fail(res: Response, error: Error | string): Response<unknown> {
-    return res.status(500).json({
-      message: error.toString(),
-    });
+  public fail(res: Response, error?: Error | string): Response<unknown> {
+    return BaseHandler.jsonResponse(
+      res,
+      500,
+      error?.toString() ?? "An Error Occurred"
+    );
   }
+
+  public uncaughtError(res: Response, message: string): void;
+
+  public uncaughtError(res: Response, error: Error, message?: string): void;
 
   public uncaughtError(
     res: Response,
@@ -90,6 +96,11 @@ export default abstract class BaseHandler {
     if (message) {
       Logger.getLogger().error(error.toString());
     }
-    this.fail(res, "An error occurred");
+
+    if (typeof error === "string" && !message) {
+      // eslint-disable-next-line no-param-reassign
+      message = error;
+    }
+    this.fail(res, message ?? "An Error Occurred");
   }
 }

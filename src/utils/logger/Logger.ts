@@ -1,5 +1,5 @@
 import winston from "winston";
-import { options } from "@configs/LoggerConfig.json";
+import { options } from "../../../configs/LoggerConfig.json";
 
 export default class Logger {
   private logger: winston.Logger;
@@ -7,12 +7,18 @@ export default class Logger {
   private static instance: Logger;
 
   private constructor() {
-    this.logger = winston.createLogger({
-      transports: [
-        new winston.transports.Console(options.console),
-        new winston.transports.File(options.file),
-      ],
-    });
+    if (process.env.NODE_ENV === "test") {
+      this.logger = winston.createLogger({
+        transports: [new winston.transports.Console(options.console)],
+      });
+    } else {
+      this.logger = winston.createLogger({
+        transports: [
+          new winston.transports.Console(options.console),
+          new winston.transports.File(options.file),
+        ],
+      });
+    }
   }
 
   public static getLoggerInstance(): Logger {

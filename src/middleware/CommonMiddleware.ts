@@ -2,8 +2,8 @@ import express, { Express } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import StaticFolderConfig from "@configs/StaticContentConfig.json";
 import path from "path";
+import StaticFolderConfig from "../../configs/StaticContentConfig.json";
 
 export default class CommonMiddleware {
   public app: Express;

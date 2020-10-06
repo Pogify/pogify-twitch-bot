@@ -1,9 +1,11 @@
-class AuthorizationValidationError extends Error {}
+export class AuthorizationValidationError extends Error {
+  message = "not a `Bearer` token";
+}
 
-export default function ValidateAuthorizationHeader(header: string): string {
+export default function ExtractAuthorizationToken(header: string): string {
   if (!header.startsWith("Bearer ")) {
-    throw new AuthorizationValidationError("not a `Bearer` token");
+    throw new AuthorizationValidationError();
   }
 
-  return header.split(" ")[1];
+  return header.split(" ").slice(1).join(" ");
 }
