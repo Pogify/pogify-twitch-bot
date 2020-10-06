@@ -14,7 +14,7 @@ const currentDiv = document.getElementById("current");
 
   if (!verifyToken(token)) return;
 
-  if (!token.accessToken) return hideProfile();
+  if (!token.access_token) return hideProfile();
 
   getProfileInformation().then(() => {
     setProfileDiv(userProfile.profile_image_url, userProfile.display_name);
