@@ -84,9 +84,8 @@ export default class TwitchClient {
         cmd: cmd as BroadcasterCommands,
         args,
       });
-    } else {
-      // handleViewerCommands(client, channel, userstate, cmd as ViewerCommands, args);
     }
+    // handleViewerCommands(client, channel, userstate, cmd as ViewerCommands, args);
   }
 
   public static async handleDisconnect(_reason: string): Promise<void> {
