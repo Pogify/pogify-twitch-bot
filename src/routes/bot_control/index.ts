@@ -1,5 +1,5 @@
 import { Router } from "express";
-import TwitchUserMiddleware from "../../middleware/auth/twitchUserMiddleware";
+import TwitchUserMiddleware from "../../middleware/auth/TwitchUserMiddleware";
 import BotCurrentController from "./BotCurrentController";
 import BotJoinController from "./BotJoinController";
 import BotPartController from "./BotPartController";
