@@ -17,7 +17,7 @@ const mockAdapter = jest.fn().mockReturnValue(
 Axios.defaults.adapter = mockAdapter;
 test("test", async () => {
   const token = nanoid();
-  let testRes = await TwitchUser.FetchUser({ token });
+  const testRes = await TwitchUser.FetchUser({ token });
 
   expect(testRes).toMatchObject({ foo: "bar" });
 });

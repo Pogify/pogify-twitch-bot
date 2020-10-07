@@ -22,11 +22,11 @@ test("test closure returns function", () => {
 });
 
 test("test upsert", async (done) => {
-  let setSessionInDB = makeSetSessionInDB(db);
-  let session = nanoid(5);
+  const setSessionInDB = makeSetSessionInDB(db);
+  const session = nanoid(5);
   await setSessionInDB("test1", session);
 
-  db.get('SELECT session FROM channels WHERE channel = "test1"', (err, res) => {
+  db.get("SELECT session FROM channels WHERE channel = \"test1\"", (err, res) => {
     expect(err).toBeFalsy();
     expect(res.session).toEqual(session);
     done();
@@ -34,9 +34,9 @@ test("test upsert", async (done) => {
 });
 
 test("test insert", async (done) => {
-  let setSessionInDB = makeSetSessionInDB(db);
-  let session = nanoid(5);
-  let channel = nanoid(5);
+  const setSessionInDB = makeSetSessionInDB(db);
+  const session = nanoid(5);
+  const channel = nanoid(5);
   await setSessionInDB(channel, session);
 
   db.get(
@@ -50,9 +50,9 @@ test("test insert", async (done) => {
 });
 
 test("test function err", async () => {
-  let db = new Database(":memory:");
-  let setSessionInDB = makeSetSessionInDB(db);
-  let session = nanoid(5);
+  const db = new Database(":memory:");
+  const setSessionInDB = makeSetSessionInDB(db);
+  const session = nanoid(5);
   let e: any;
   try {
     await setSessionInDB("test1", session);

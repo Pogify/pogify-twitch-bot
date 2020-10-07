@@ -2,16 +2,16 @@ import CsrfTokenIssueMiddleware from "./CsrfTokenIssueMiddleware";
 import CsrfTokenConstants from "../../constants/CsrfTokenConstants.json";
 
 let csrfTokenIssueMiddleware: CsrfTokenIssueMiddleware;
-let mockReq = jest.fn() as any;
+const mockReq = jest.fn() as any;
 const res = {} as any;
-let mockCookie = jest.fn().mockReturnValue(res);
-let mockRes = () => {
+const mockCookie = jest.fn().mockReturnValue(res);
+const mockRes = () => {
   res.cookie = mockCookie;
   res.status = jest.fn().mockReturnValue(res);
   res.json = jest.fn().mockReturnValue(res);
   return res;
 };
-let mockNext = jest.fn() as any;
+const mockNext = jest.fn() as any;
 
 beforeEach(() => {
   jest.clearAllMocks();

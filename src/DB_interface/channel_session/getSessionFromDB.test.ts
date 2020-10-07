@@ -21,21 +21,21 @@ test("test closure returns function", () => {
 });
 
 test("test exists", async () => {
-  let getSessionFromDB = makeGetSessionFromDB(db);
-  let session = await getSessionFromDB("test1");
+  const getSessionFromDB = makeGetSessionFromDB(db);
+  const session = await getSessionFromDB("test1");
 
   expect(session).toEqual("sess1");
 });
 test("test doesn't exist", async () => {
-  let getSessionFromDB = makeGetSessionFromDB(db);
-  let session = await getSessionFromDB("randomchannel");
+  const getSessionFromDB = makeGetSessionFromDB(db);
+  const session = await getSessionFromDB("randomchannel");
 
   expect(session).toEqual("");
 });
 
 test("test function err", async () => {
-  let db = new Database(":memory:");
-  let getSessionFromDB = makeGetSessionFromDB(db);
+  const db = new Database(":memory:");
+  const getSessionFromDB = makeGetSessionFromDB(db);
   let e: any;
   try {
     await getSessionFromDB("test1");

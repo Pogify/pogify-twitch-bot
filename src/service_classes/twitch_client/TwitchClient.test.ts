@@ -1,14 +1,15 @@
-import pogifyUrls from "../../constants/PogifyConstants.json";
 
 import { mocked } from "ts-jest/utils";
 import tmi from "tmi.js";
-jest.mock("tmi.js");
-import * as DBI from "../../DB_interface/channel_session";
-jest.mock("../../DB_interface/channel_session");
-
-import TwitchClient from "./TwitchClient";
 import { EventEmitter } from "events";
 import { nanoid } from "nanoid";
+import * as DBI from "../../DB_interface/channel_session";
+
+import TwitchClient from "./TwitchClient";
+import pogifyUrls from "../../constants/PogifyConstants.json";
+
+jest.mock("tmi.js");
+jest.mock("../../DB_interface/channel_session");
 
 const mockConnect = jest.fn();
 const mockOnce = jest.fn();
@@ -20,16 +21,22 @@ class MockClient extends EventEmitter {
   constructor(public options?: tmi.Options) {
     super();
   }
+
   connect = mockConnect.mockResolvedValue({});
+
   once = mockOnce.mockImplementation((_: any, cb: Function) => {
     setImmediate(() => {
       cb();
     });
     return this;
   });
+
   on = mockOn;
+
   say = mockSay;
+
   part = mockPart;
+
   join = mockJoin;
 }
 
@@ -42,7 +49,7 @@ const mockedDBI = mocked(DBI, true);
 mockedDBI.getInitialChannelListFromDB.mockResolvedValue([]);
 let testChannel: string;
 beforeEach(() => {
-  testChannel = "#" + nanoid();
+  testChannel = `#${  nanoid()}`;
   TwitchClient.client = (new MockClient() as unknown) as tmi.Client;
   jest.clearAllMocks();
 });
@@ -58,7 +65,7 @@ test("test init", (done) => {
 });
 
 test("test initClient", async () => {
-  let client = ((await TwitchClient.initClient(
+  const client = ((await TwitchClient.initClient(
     "token"
   )) as unknown) as MockClient;
   expect(client.options).toStrictEqual(
@@ -69,7 +76,7 @@ test("test initClient", async () => {
 });
 
 test("test binding", () => {
-  let client = (new MockClient() as unknown) as tmi.Client;
+  const client = (new MockClient() as unknown) as tmi.Client;
   TwitchClient.BindEventHandlers(client);
 
   expect(mockOn).toBeCalledWith("message", expect.any(Function));
@@ -89,7 +96,7 @@ describe("test handleMessage", () => {
     TwitchClient.handleMessage(
       "channel",
       {},
-      nanoid() + "!pogify" + nanoid(10),
+      `${nanoid()  }!pogify${  nanoid(10)}`,
       false
     );
     expect(TwitchClient.client!.say).not.toBeCalled();
@@ -143,7 +150,7 @@ describe("test handleBroadCasterCommands", () => {
   test("test set", () => {
     const spySetSession = jest.spyOn(TwitchClient, "SetSession");
 
-    let testSessionId = nanoid(5);
+    const testSessionId = nanoid(5);
     TwitchClient.handleBroadcasterCommands({
       args: [testSessionId, "edf"],
       channel: testChannel,

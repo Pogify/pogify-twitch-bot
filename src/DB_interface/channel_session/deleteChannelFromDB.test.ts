@@ -21,10 +21,10 @@ test("test closure returns function", () => {
 });
 
 test("test function ", async (done) => {
-  let deleteChannelFromDB = makeDeleteChannelFromDB(db);
+  const deleteChannelFromDB = makeDeleteChannelFromDB(db);
   await deleteChannelFromDB("test1");
 
-  db.all('SELECT channel FROM channels WHERE channel = "test1"', (err, row) => {
+  db.all("SELECT channel FROM channels WHERE channel = \"test1\"", (err, row) => {
     expect(err).toBeFalsy();
     expect(row).toHaveLength(0);
     done();
@@ -32,8 +32,8 @@ test("test function ", async (done) => {
 });
 
 test("test function err", async () => {
-  let db = new Database(":memory:");
-  let deleteChannelFromDB = makeDeleteChannelFromDB(db);
+  const db = new Database(":memory:");
+  const deleteChannelFromDB = makeDeleteChannelFromDB(db);
   let e: any;
   try {
     await deleteChannelFromDB("test1");

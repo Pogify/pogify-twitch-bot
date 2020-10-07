@@ -5,14 +5,14 @@ import Logger from "./Logger";
 describe("test logger", () => {
   test("test static getLogger", () => {
     const logger = Logger;
-    let loggerInstance = logger.getLoggerInstance();
+    const loggerInstance = logger.getLoggerInstance();
 
     expect(loggerInstance).toBeInstanceOf(Logger);
   });
 
   test("test static getLoggerInstance", () => {
     const logger = Logger;
-    let loggerInstanceLogger = logger.getLogger();
+    const loggerInstanceLogger = logger.getLogger();
     expect(loggerInstanceLogger).toBeInstanceOf(L);
   });
 

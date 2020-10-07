@@ -21,11 +21,11 @@ test("test closure returns function", () => {
 });
 
 test("test function", async (done) => {
-  let setChannelConnectedInDB = makeSetChannelConnectedInDB(db);
+  const setChannelConnectedInDB = makeSetChannelConnectedInDB(db);
   await setChannelConnectedInDB("test3");
 
   db.get(
-    'SELECT connected FROM channels WHERE channel = "test3"',
+    "SELECT connected FROM channels WHERE channel = \"test3\"",
     (err, res) => {
       expect(err).toBeFalsy();
       expect(res.connected).toEqual(1);
@@ -35,8 +35,8 @@ test("test function", async (done) => {
 });
 
 test("test function err", async () => {
-  let db = new Database(":memory:");
-  let setChannelConnectedInDB = makeSetChannelConnectedInDB(db);
+  const db = new Database(":memory:");
+  const setChannelConnectedInDB = makeSetChannelConnectedInDB(db);
   let e: any;
   try {
     await setChannelConnectedInDB("test1");

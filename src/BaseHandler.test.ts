@@ -16,7 +16,7 @@ type MockResponse = Response;
 
 let testBaseHandler: TestBaseHandler;
 let mockRes: MockResponse;
-let jsonResponseSpy = jest.spyOn(BaseHandler, "jsonResponse");
+const jsonResponseSpy = jest.spyOn(BaseHandler, "jsonResponse");
 const mockResponse = () => {
   const res = {} as MockResponse;
   res.status = jest.fn().mockReturnValue(res);
@@ -38,7 +38,7 @@ afterEach(() => {
 
 describe("test ok", () => {
   test("test without dto", () => {
-    let returnRes = testBaseHandler.ok(mockRes);
+    const returnRes = testBaseHandler.ok(mockRes);
 
     expect(returnRes).toBe(mockRes);
     expect(mockRes.sendStatus).toBeCalled();
@@ -63,7 +63,7 @@ test("test jsonReponse", () => {
     message: "this is a message",
   };
 
-  let returnRes = TestBaseHandler.jsonResponse(
+  const returnRes = TestBaseHandler.jsonResponse(
     args.res,
     args.code,
     args.message
@@ -78,7 +78,7 @@ test("test jsonReponse", () => {
 });
 
 test("test created", () => {
-  let returnRes = testBaseHandler.created(mockRes);
+  const returnRes = testBaseHandler.created(mockRes);
 
   expect(returnRes).toBe(returnRes);
   expect(returnRes.sendStatus).toBeCalledWith(201);
@@ -88,7 +88,7 @@ describe("test clientError", () => {
   const CLIENT_ERROR_CODE = 400;
   test("with message", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.clientError(mockRes, testMessage);
+    const returnRes = testBaseHandler.clientError(mockRes, testMessage);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -98,7 +98,7 @@ describe("test clientError", () => {
     );
   });
   test("without message", () => {
-    let returnRes = testBaseHandler.clientError(mockRes);
+    const returnRes = testBaseHandler.clientError(mockRes);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -112,7 +112,7 @@ describe("test unauthorized", () => {
   const unauthorized_CODE = 401;
   test("with message", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.unauthorized(mockRes, testMessage);
+    const returnRes = testBaseHandler.unauthorized(mockRes, testMessage);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -122,7 +122,7 @@ describe("test unauthorized", () => {
     );
   });
   test("without message", () => {
-    let returnRes = testBaseHandler.unauthorized(mockRes);
+    const returnRes = testBaseHandler.unauthorized(mockRes);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -136,7 +136,7 @@ describe("test paymentRequired", () => {
   const paymentRequired_CODE = 402;
   test("with message", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.paymentRequired(mockRes, testMessage);
+    const returnRes = testBaseHandler.paymentRequired(mockRes, testMessage);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -146,7 +146,7 @@ describe("test paymentRequired", () => {
     );
   });
   test("without message", () => {
-    let returnRes = testBaseHandler.paymentRequired(mockRes);
+    const returnRes = testBaseHandler.paymentRequired(mockRes);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -160,7 +160,7 @@ describe("test forbidden", () => {
   const forbidden_CODE = 403;
   test("with message", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.forbidden(mockRes, testMessage);
+    const returnRes = testBaseHandler.forbidden(mockRes, testMessage);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -170,7 +170,7 @@ describe("test forbidden", () => {
     );
   });
   test("without message", () => {
-    let returnRes = testBaseHandler.forbidden(mockRes);
+    const returnRes = testBaseHandler.forbidden(mockRes);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -184,7 +184,7 @@ describe("test notFound", () => {
   const notFound_CODE = 404;
   test("with message", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.notFound(mockRes, testMessage);
+    const returnRes = testBaseHandler.notFound(mockRes, testMessage);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -194,7 +194,7 @@ describe("test notFound", () => {
     );
   });
   test("without message", () => {
-    let returnRes = testBaseHandler.notFound(mockRes);
+    const returnRes = testBaseHandler.notFound(mockRes);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -208,7 +208,7 @@ describe("test conflict", () => {
   const conflict_CODE = 409;
   test("with message", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.conflict(mockRes, testMessage);
+    const returnRes = testBaseHandler.conflict(mockRes, testMessage);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -218,7 +218,7 @@ describe("test conflict", () => {
     );
   });
   test("without message", () => {
-    let returnRes = testBaseHandler.conflict(mockRes);
+    const returnRes = testBaseHandler.conflict(mockRes);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -232,7 +232,7 @@ describe("test tooMany", () => {
   const tooMany_CODE = 429;
   test("with message", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.tooMany(mockRes, testMessage);
+    const returnRes = testBaseHandler.tooMany(mockRes, testMessage);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -242,7 +242,7 @@ describe("test tooMany", () => {
     );
   });
   test("without message", () => {
-    let returnRes = testBaseHandler.tooMany(mockRes);
+    const returnRes = testBaseHandler.tooMany(mockRes);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -254,7 +254,7 @@ describe("test tooMany", () => {
 });
 test("test todo", () => {
   const todo_CODE = 400;
-  let returnRes = testBaseHandler.todo(mockRes);
+  const returnRes = testBaseHandler.todo(mockRes);
 
   expect(returnRes).toBe(returnRes);
   expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -268,7 +268,7 @@ describe("test fail", () => {
   const fail_CODE = 500;
   test("with message", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.fail(mockRes, testMessage);
+    const returnRes = testBaseHandler.fail(mockRes, testMessage);
 
     expect(returnRes).toBe(returnRes);
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -307,7 +307,7 @@ describe("test uncaughtError", () => {
     test("with message", () => {
       const testMessage = nanoid();
       const testError = new Error(nanoid());
-      let returnRes = testBaseHandler.uncaughtError(
+      const returnRes = testBaseHandler.uncaughtError(
         mockRes,
         testError,
         testMessage
@@ -319,7 +319,7 @@ describe("test uncaughtError", () => {
     test("without message", () => {
       const testMessage = nanoid();
       const testError = new Error(nanoid());
-      let returnRes = testBaseHandler.uncaughtError(mockRes, testError);
+      const returnRes = testBaseHandler.uncaughtError(mockRes, testError);
 
       expect(returnRes).toBeUndefined();
       expect(TestBaseHandler.jsonResponse).toBeCalledWith(
@@ -332,7 +332,7 @@ describe("test uncaughtError", () => {
 
   test("without error", () => {
     const testMessage = nanoid();
-    let returnRes = testBaseHandler.uncaughtError(mockRes, testMessage);
+    const returnRes = testBaseHandler.uncaughtError(mockRes, testMessage);
 
     expect(returnRes).toBeUndefined();
     expect(TestBaseHandler.jsonResponse).toBeCalledWith(

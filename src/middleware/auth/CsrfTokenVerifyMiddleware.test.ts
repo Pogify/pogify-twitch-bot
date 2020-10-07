@@ -1,7 +1,7 @@
-import CsrfTokenVerifyMiddleware from "./CsrfTokenVerifyMiddleware";
-import CsrfTokenConstants from "../../constants/CsrfTokenConstants.json";
 import { Request } from "express";
 import { nanoid } from "nanoid";
+import CsrfTokenVerifyMiddleware from "./CsrfTokenVerifyMiddleware";
+import CsrfTokenConstants from "../../constants/CsrfTokenConstants.json";
 
 let csrfTokenVerifyMiddleware = new CsrfTokenVerifyMiddleware();
 let state1: string;

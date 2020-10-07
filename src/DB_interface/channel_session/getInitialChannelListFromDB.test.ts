@@ -23,15 +23,15 @@ test("test closure returns function", () => {
 });
 
 test("test function", async () => {
-  let getInitialChannelListFromDB = makeGetInitialChannelListFromDB(db);
-  let initialList = await getInitialChannelListFromDB();
+  const getInitialChannelListFromDB = makeGetInitialChannelListFromDB(db);
+  const initialList = await getInitialChannelListFromDB();
 
   expect(initialList.sort()).toEqual(["test1", "test2", "test4"]);
 });
 
 test("test function err", async () => {
-  let db = new Database(":memory:");
-  let getInitialChannelListFromDB = makeGetInitialChannelListFromDB(db);
+  const db = new Database(":memory:");
+  const getInitialChannelListFromDB = makeGetInitialChannelListFromDB(db);
   let e: any;
   try {
     await getInitialChannelListFromDB();

@@ -6,7 +6,7 @@ beforeAll(() => {
 });
 
 test("test localhost", () => {
-  let testCases = [
+  const testCases = [
     {
       args: { proto: "http", host: "localhost", path: "" },
       expect: `http://localhost:${port}`,
@@ -32,22 +32,22 @@ test("test localhost", () => {
   }
 });
 test("test other", () => {
-  let testCases = [
+  const testCases = [
     {
       args: { proto: "http", host: "test.com" },
-      expect: `http://test.com`,
+      expect: "http://test.com",
     },
     {
       args: { proto: "https", host: "www.test.com" },
-      expect: `https://www.test.com`,
+      expect: "https://www.test.com",
     },
     {
       args: { proto: "https", host: "api.test.com", path: "/testpath" },
-      expect: `https://api.test.com/testpath`,
+      expect: "https://api.test.com/testpath",
     },
     {
       args: { proto: "https", host: "api.test.com", path: "testpath" },
-      expect: `https://api.test.com/testpath`,
+      expect: "https://api.test.com/testpath",
     },
   ];
 

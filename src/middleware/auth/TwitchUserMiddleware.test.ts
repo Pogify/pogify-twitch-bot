@@ -1,11 +1,12 @@
-import TwitchUserMiddleware from "./TwitchUserMiddleware";
-jest.mock("../../service_classes/models/twitch_user/TwitchUser");
-jest.mock("../../utils/ValidateAuthorizationHeader");
-import { TwitchUser } from "../../service_classes/models/twitch_user/TwitchUser";
 import { mocked } from "ts-jest/utils";
+import TwitchUserMiddleware from "./TwitchUserMiddleware";
+import { TwitchUser } from "../../service_classes/models/twitch_user/TwitchUser";
 import ExtractAuthorizationToken, {
   AuthorizationValidationError,
 } from "../../utils/ValidateAuthorizationHeader";
+
+jest.mock("../../service_classes/models/twitch_user/TwitchUser");
+jest.mock("../../utils/ValidateAuthorizationHeader");
 
 let twitchUserMiddleware: TwitchUserMiddleware;
 const mockedTwitchUser = mocked(TwitchUser, true);

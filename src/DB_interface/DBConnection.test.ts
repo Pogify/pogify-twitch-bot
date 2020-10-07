@@ -9,7 +9,7 @@ beforeEach(() => {
 describe("test makeDBConnection", () => {
   //
   test("fallback memory shouldn't err", (done) => {
-    let db = DBConnection.makeDBConnection().then((db) => {
+    const db = DBConnection.makeDBConnection().then((db) => {
       // @ts-ignore
       console.log(db);
       done();
@@ -19,24 +19,24 @@ describe("test makeDBConnection", () => {
 
 describe("getConnection", () => {
   test("no prior instance", async () => {
-    let connection = await DBConnection.getConnection();
+    const connection = await DBConnection.getConnection();
     expect(connection).toBeInstanceOf(Database);
   });
   test("with prior instance", async () => {
     await DBConnection.getConnection();
-    let connection = await DBConnection.getConnection();
+    const connection = await DBConnection.getConnection();
     expect(connection).toBeInstanceOf(Database);
   });
 });
 
 describe("getConnectionSync", () => {
   test("no prior instance", () => {
-    let connection = DBConnection.getConnectionSync();
+    const connection = DBConnection.getConnectionSync();
     expect(connection).toBeInstanceOf(Database);
   });
   test("with prior instance", () => {
     DBConnection.getConnectionSync();
-    let connection = DBConnection.getConnectionSync();
+    const connection = DBConnection.getConnectionSync();
     expect(connection).toBeInstanceOf(Database);
   });
 });

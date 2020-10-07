@@ -1,13 +1,9 @@
-import express, { Express } from "express";
-jest.mock("express");
-import { mocked } from "ts-jest/utils";
+import { Express } from "express";
 import CommonMiddleware from "./CommonMiddleware";
 
-let commonMiddleware: CommonMiddleware;
+jest.mock("express");
 
-let mockedExpress = mocked(express, true);
-let mockedApp = mocked(express(), true);
-mockedExpress.mockReturnValue(mockedApp);
+let commonMiddleware: CommonMiddleware;
 
 const app = {
   use: jest.fn(),
