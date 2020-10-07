@@ -15,10 +15,15 @@ export default class InitializeCallbackController extends BaseController {
         return;
       }
 
+      if (!req.query.code) {
+        this.clientError(res, "missing code");
+        return;
+      }
+
       let token: string;
       try {
         token = await FetchToken({
-          code: req.query.code as string,
+          code: req.query.code.toString(),
           redirectUri: redirectUri(
             req.protocol,
             req.hostname,
@@ -35,6 +40,8 @@ export default class InitializeCallbackController extends BaseController {
         return;
       }
 
+      // guaranteed to return a user since token is fetched internally
+      // any error would be server side
       const user = await TwitchUser.FetchUser({ token });
 
       if (user.display_name !== process.env.BOT_USERNAME) {
