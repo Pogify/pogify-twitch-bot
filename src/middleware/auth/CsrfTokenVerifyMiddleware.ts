@@ -13,7 +13,11 @@ export default class CsrfTokenVerifyMiddleware extends BaseMiddleware {
     try {
       const { state } = req.query;
       const csrfState = req.cookies[CsrfTokenConstants.cookieName];
-      if (state && csrfState && state !== csrfState) {
+      if (
+        state !== csrfState ||
+        state === undefined ||
+        csrfState === undefined
+      ) {
         res.status(422).send(`Invalid state: ${csrfState} != ${state}`);
         return;
       }
