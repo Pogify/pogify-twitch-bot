@@ -7,6 +7,8 @@ import TwitchClient from "../../service_classes/twitch_client/TwitchClient";
 import { TwitchUser } from "../../service_classes/models/twitch_user/TwitchUser";
 import { FetchToken } from "../../service_classes/auth/twitch";
 
+const { BOT_USERNAME } = process.env;
+
 export default class InitializeCallbackController extends BaseController {
   protected async executeImpl(req: Request, res: Response): Promise<void> {
     try {
@@ -31,11 +33,11 @@ export default class InitializeCallbackController extends BaseController {
           ),
         });
       } catch (err) {
-        if (err.response && err.response.status === 400) {
+        if (err.response && err.response.status > 499) {
           Logger.getLogger().info(JSON.stringify(err));
-          this.clientError(res, "invalid code");
-        } else {
           this.fail(res, err);
+        } else {
+          this.clientError(res, err.toString());
         }
         return;
       }
@@ -43,8 +45,7 @@ export default class InitializeCallbackController extends BaseController {
       // guaranteed to return a user since token is fetched internally
       // any error would be server side
       const user = await TwitchUser.FetchUser({ token });
-
-      if (user.display_name !== process.env.BOT_USERNAME) {
+      if (user.login !== BOT_USERNAME) {
         this.forbidden(res, "token not for bot");
         return;
       }
