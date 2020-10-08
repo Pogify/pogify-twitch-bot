@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test bind middleware 1`] = `
+Array [
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "query",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "expressInit",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "cookieParser",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "corsMiddleware",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "serveStatic",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/public\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+]
+`;

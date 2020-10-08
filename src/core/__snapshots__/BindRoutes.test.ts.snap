@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test bindRoutes 1`] = `
+Array [
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "query",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "expressInit",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "router",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "router",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/init\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+  Layer {
+    "handle": [Function],
+    "keys": Array [],
+    "name": "router",
+    "params": undefined,
+    "path": undefined,
+    "regexp": /\\^\\\\/\\?\\(\\?=\\\\/\\|\\$\\)/i,
+    "route": undefined,
+  },
+]
+`;
