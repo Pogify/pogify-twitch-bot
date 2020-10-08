@@ -115,4 +115,4 @@ All endpoints with the exception of the root `/`, init `/init`, and init callbac
 
 - better UI.
   - current ui is barebones.
-- tests
+- ~~tests~~
