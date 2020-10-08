@@ -13,6 +13,7 @@ declare namespace Express {
       view_count: number;
       created_at: string;
     };
+    csrfToken?: string;
   }
 }
 

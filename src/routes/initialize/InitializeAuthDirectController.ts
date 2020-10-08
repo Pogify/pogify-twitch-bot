@@ -17,6 +17,9 @@ export default class InitialzeAuthDirectController extends BaseController {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       params.set("client_id", TWITCH_CLIENT_ID!);
       params.set("force_verify", "true");
+      if (req.csrfToken) {
+        params.set("state", req.csrfToken);
+      }
 
       res.redirect(`${TwitchConstants.authorize}?${params.toString()}`);
     } catch (e) {

@@ -5,7 +5,7 @@ import CsrfTokenConstants from "../../constants/CsrfTokenConstants.json";
 
 export default class CsrfTokenIssueMiddleware extends BaseMiddleware {
   protected async executeImpl(
-    _req: Request,
+    req: Request,
     res: Response,
     next: NextFunction
   ): Promise<void> {
@@ -17,6 +17,7 @@ export default class CsrfTokenIssueMiddleware extends BaseMiddleware {
         httpOnly: true,
         maxAge: 15 * 60 * 1000,
       });
+      req.csrfToken = csrfToken;
       this.next(next);
     } catch (e) {
       this.uncaughtError(res, e);

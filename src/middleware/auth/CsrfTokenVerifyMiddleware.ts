@@ -12,7 +12,8 @@ export default class CsrfTokenVerifyMiddleware extends BaseMiddleware {
   ): Promise<void> {
     try {
       const { state } = req.query;
-      const csrfState = req.cookies[CsrfTokenConstants.cookieName];
+      const csrfState = req.signedCookies[CsrfTokenConstants.cookieName];
+      console.log(req.signedCookies);
       if (
         state !== csrfState ||
         state === undefined ||

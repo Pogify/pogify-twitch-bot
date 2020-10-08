@@ -17,7 +17,7 @@ test("test verify", () => {
     query: {
       state: state1,
     },
-    cookies: {
+    signedCookies: {
       [CsrfTokenConstants.cookieName]: state1,
     },
   } as unknown) as Request;
@@ -36,7 +36,7 @@ test("test mismatch", () => {
     query: {
       state: state1,
     },
-    cookies: {
+    signedCookies: {
       [CsrfTokenConstants.cookieName]: state2,
     },
   } as unknown) as Request;
@@ -57,7 +57,7 @@ describe("test missing", () => {
     const failSpy = jest.spyOn(csrfTokenVerifyMiddleware, "fail");
     const req = ({
       query: {},
-      cookies: {
+      signedCookies: {
         [CsrfTokenConstants.cookieName]: state1,
       },
     } as unknown) as Request;
@@ -78,7 +78,7 @@ describe("test missing", () => {
       query: {
         state: state1,
       },
-      cookies: {},
+      signedCookies: {},
     } as unknown) as Request;
     const res: any = {};
     res.status = jest.fn().mockReturnValue(res);
@@ -95,7 +95,7 @@ describe("test missing", () => {
     const failSpy = jest.spyOn(csrfTokenVerifyMiddleware, "fail");
     const req = ({
       query: {},
-      cookies: {},
+      signedCookies: {},
     } as unknown) as Request;
     const res: any = {};
     res.status = jest.fn().mockReturnValue(res);
